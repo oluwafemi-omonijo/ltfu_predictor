@@ -3,13 +3,12 @@ import pandas as pd
 import numpy as np
 import joblib
 
-#Page configuration
+# Page configuration
 st.set_page_config(page_title="HIV LTFU Risk Predictor", layout="centered")
 
-#load trained model
+# Load trained model
 model = joblib.load("random_forest_model.pkl")
 
-#App title
 # App Title
 st.title("🩺 HIV Loss to Follow-Up (LTFU) Risk Predictor")
 st.markdown("Estimate a patient's risk of being lost to follow-up based on clinical and visit history.")
@@ -31,22 +30,12 @@ adherence_score = (
     np.random.uniform(0.85, 1.0) * 0.2
 )
 
-
-# Create input DataFrame
+# Create input DataFrame with exact features used during training
 input_df = pd.DataFrame([[
-    age, sex_binary, adherence_score, cd4, visit_gap,
-    missed_visits]], columns=[
-    'age', 'sex', 'adherence_score', 'cd4_count', 'last_visit_gap_days',
-    'missed_visits'])
-
-input_df = pd.DataFrame([[ ... ]], columns=[ ... ])
-
-# Align columns with model training features
-expected_features = [
-    'age', 'sex', 'adherence_score', 'cd4_count',
-    'last_visit_gap_days', 'missed_visits'
-]
-
+    age, sex_binary, adherence_score, cd4, visit_gap, missed_visits
+]], columns=[
+    'age', 'sex', 'adherence_score', 'cd4_count', 'last_visit_gap_days', 'missed_visits'
+])
 
 # Prediction
 if st.button("Predict LTFU Risk"):
@@ -57,3 +46,4 @@ if st.button("Predict LTFU Risk"):
         st.error("⚠️ High risk: Consider follow-up interventions.")
     else:
         st.success("✅ Low risk: Patient likely to stay in care.")
+        Ctrl + S
