@@ -31,18 +31,22 @@ adherence_score = (
     np.random.uniform(0.85, 1.0) * 0.2
 )
 
-# Feature engineering
-age_x_missed = age * missed_visits
-adherence_x_gap = adherence_score * visit_gap
 
 # Create input DataFrame
 input_df = pd.DataFrame([[
     age, sex_binary, adherence_score, cd4, visit_gap,
-    missed_visits, age_x_missed, adherence_x_gap
-]], columns=[
+    missed_visits]], columns=[
     'age', 'sex', 'adherence_score', 'cd4_count', 'last_visit_gap_days',
-    'missed_visits', 'age_x_missed', 'adherence_x_gap'
-])
+    'missed_visits'])
+
+input_df = pd.DataFrame([[ ... ]], columns=[ ... ])
+
+# Align columns with model training features
+expected_features = [
+    'age', 'sex', 'adherence_score', 'cd4_count',
+    'last_visit_gap_days', 'missed_visits'
+]
+
 
 # Prediction
 if st.button("Predict LTFU Risk"):
